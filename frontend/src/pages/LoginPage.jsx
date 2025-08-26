@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginForm from '../component/LoginForm'
 import { Link } from 'react-router';
+import TokenTestButton from '../component/TokenTestButton';
 
 const LoginPage = () => {
   return (
@@ -8,6 +9,7 @@ const LoginPage = () => {
         <div className='bg-black bg-opacity-70 p-10 rounded-lg shadow-lg q-96 text-white'>
             <h2 className='text-3xl font-bold mb-6 text-center'> Login</h2>
             <LoginForm />
+            <TokenTestButton />
             <Link to={"/register"} className='text-sm text-center mt-4'>Don't have an account ?</Link>
         </div>
     </div>

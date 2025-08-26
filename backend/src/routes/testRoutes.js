@@ -22,11 +22,11 @@ router.get("/test-firebase", async (req, res) => {
 })
 
 //test token verification middleware
-router.get("test-token", verifyToken, (req, res) => {
+router.get("/test-token", verifyToken, (req, res) => {
     try {
         res.json({
             message: "You are authorized!",
-            user: req.user, //comes from firebase token
+            user: req.user //comes from firebase token
         })
     } catch (error) {
         console.error("token verification test failed", error);
