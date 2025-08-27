@@ -5,6 +5,7 @@ import cors from "cors";
 
 import { connectDB } from "./config/db.js";
 import testRoutes from "./routes/testRoutes.js";
+import profileRoutes from "./routes/profileRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,9 @@ app.use(cors({origin: "http://localhost:5173"}));
 
 //testroutes
 app.use("/api", testRoutes);
+
+//app routes
+app.use("/profiles", profileRoutes);
 
 connectDB().then(() => {
     app.listen(PORT, ()=> {
