@@ -2,8 +2,8 @@ import React from 'react'
 import { Route, Routes } from 'react-router'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
-import ProfilePage from './pages/ProfilePage'
 import HomePage from './pages/HomePage'
+import ProfileSelectorPage from './pages/ProfileSelectorPage'
 
 const App = () => {
   return (
@@ -12,7 +12,7 @@ const App = () => {
         <Route path='/' element={ <HomePage />} />
         <Route path='/login' element={ <LoginPage />} />
         <Route path='/register' element={ <RegisterPage />} />
-        <Route path='/profiles' element={ <ProfilePage />} />
+        <Route path='/profiles' element={ <ProfileSelectorPage />} />
       </Routes>
       
     </div>

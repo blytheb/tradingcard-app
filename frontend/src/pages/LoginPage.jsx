@@ -1,7 +1,7 @@
 import React from 'react'
-import LoginForm from '../component/LoginForm'
+import LoginForm from '../components/auth/LoginForm.jsx';
 import { Link } from 'react-router';
-import TokenTestButton from '../component/TokenTestButton';
+import TokenTestButton from '../components/auth/TokenTestButton';
 
 const LoginPage = () => {
   return (

@@ -1,27 +1,33 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router';';'
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
 
-export default function LoginForm() {
+function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password,setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+    }
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/profiles")
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate("/profiles");
     } catch (error) {
-      console.error("Error in handleLogin", error);
+      console.error("Error in handleRegister", error);
       setError(error.message);
     }
   }
 
   return (
-    <form onSubmit={handleLogin} className='flex flex-col gap-4'>
+    <form onSubmit={handleRegister} className='flex flex-col gap-4'>
       {error && <p className='text-red-500'>{error}</p>}
 
       <input
@@ -41,9 +47,19 @@ export default function LoginForm() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
+      <input
+        type='password'
+        placeholder='Confirm Password'
+        className='input input-bordered w-full text-black'
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+      />
+
       <button type='submit' className='btn btn-primary w-full hover:scale-105 transition'>
-        Login
+        Register
       </button>
     </form>
   );
 }
+
+export default RegisterForm;
