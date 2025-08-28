@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from "react-router";
 
 export default function ProfileCard({ profile, onSelect }) {
   return (
-    <div
+    <Link
       onClick={onSelect}
+      to={'/home'}
       className="flex flex-col items-center cursor-pointer hover:scale-105 transform transition-all duration-200"
     >
       <img
@@ -13,6 +15,6 @@ export default function ProfileCard({ profile, onSelect }) {
       />
       <span className="text-lg">{profile.name}</span>
       {profile.isKid && <span className="text-sm text-blue-400">Kid</span>}
-    </div>
+    </Link>
   );
 }
