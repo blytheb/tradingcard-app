@@ -1,22 +1,54 @@
 import React from 'react'
-import { Route, Routes } from 'react-router'
+import { Routes, Route } from 'react-router'
+
+//pages
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import HomePage from './pages/HomePage'
 import ProfileSelectorPage from './pages/ProfileSelectorPage'
+import NotFoundPage from './pages/NotFoundPage';
+
+//context providers
+// import AuthProvider from './context/AuthContext'
+// import ProfileProvider from './context/ProfileContext'
+
+//route protection components
+import ProtectedRoute from './components/ProtectedRoute'
+import ProfileProtectedRoute from './components/ProfileProtectedRoute'
 
 const App = () => {
   return (
-    <div>
-      <Routes>
-        <Route path='/home' element={ <HomePage />} />
-        <Route path='/login' element={ <LoginPage />} />
-        <Route path='/register' element={ <RegisterPage />} />
-        <Route path='/profiles' element={ <ProfileSelectorPage />} />
-      </Routes>
+    <Routes>
+      {/* public routes */}
+      <Route path='/login' element={ <LoginPage />} />
+      <Route path='/register' element={ <RegisterPage />} />
+
+      { /* Profile selector: must be logged in */}
+      <Route 
+        path='/profiles' 
+        element={
+        <ProtectedRoute>
+          <ProfileSelectorPage />
+        </ProtectedRoute>
+        }
+      />
       
-    </div>
-  )
+      { /* Home page: must be logged in AND have selected a profile*/}
+      <Route 
+        path='/home' 
+        element={
+          <ProtectedRoute>
+            <ProfileProtectedRoute>
+              <HomePage />
+            </ProfileProtectedRoute>
+          </ProtectedRoute>
+        }
+      />
+
+      { /** Fallback Route */}
+      <Route path='/' element={<NotFoundPage />} />
+    </Routes>
+  );
 }
 
 export default App

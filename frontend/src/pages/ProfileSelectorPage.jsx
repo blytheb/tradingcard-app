@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
 import ProfileGrid from '../components/profile/ProfileGrid';
 import ManageProfilesButton from '../components/profile/ManageProfilesButton';
+import TestAuth from "../components/test/TestAuth"
+
+import { useProfile } from '../hooks/useProfile';
+import { useNavigate } from 'react-router';
 
 const profilesData = [
   { id: 1, name: 'Blythe', avatar: 'https://robohash.org/1?200x200', isKid: false },
@@ -8,18 +11,22 @@ const profilesData = [
   // ...more profiles
 ];
 
-export default function ProfileSelectorPage() {
-  const [profiles, setProfiles] = useState(profilesData);
+export default function ProfileSelectorPage({profilesData}) {
+  const {setProfile} = useProfile();
+  const navigate = useNavigate();
 
   const handleSelectProfile = (profile) => {
     console.log('Selected profile:', profile);
+    setProfile(profile);
+    navigate("/home");
     // Navigate to main app/dashboard
   };
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center text-white">
+      <TestAuth />
       <h1 className="text-3xl mb-8">Who’s watching?</h1>
-      <ProfileGrid profiles={profiles} onSelectProfile={handleSelectProfile} />
+      <ProfileGrid profiles={profilesData} onSelectProfile={handleSelectProfile} />
       <ManageProfilesButton />
     </div>
   );
