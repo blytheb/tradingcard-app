@@ -7,7 +7,7 @@ export default function TestAuth() {
     if (loading) return <h1>LOADING...</h1>
 
     return (
-        <div className="p-4 bg-gray-100 rounded shadow">
+        <div className="p-4 bg-gray-100 rounded shadow text-black">
             <h2 className="text-lg font-bold">AUTH TEST</h2>
             { user ? (
                 <>

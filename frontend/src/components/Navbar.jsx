@@ -1,23 +1,13 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link} from 'react-router'
 import { useAuth } from '../hooks/useAuth'
 import { useProfile } from '../hooks/useProfile'
-import { logout } from '../firebase';
+import { useLogout } from '../hooks/useLogout';
 
 const Navbar = () => {
     const { user } = useAuth();
     const { profile } = useProfile();
-    const navigate = useNavigate();
-
-    const handleLogout = async () => {
-        try {
-            await logout();
-            navigate("/login"); //redirect ot login after logout
-        } catch (error) {
-            console.error("error logging out:", error);
-            
-        }
-    }
+    const handleLogout = useLogout();
 
   return (
     <div className="navbar bg-base-100 shadow-md px-4 md:px-8">
@@ -52,12 +42,7 @@ const Navbar = () => {
                     <li><Link to="/settings">User Settings</Link></li>
                     <li><Link onClick={handleLogout}>Logout</Link></li>
                     </>
-                )
-
-                }
-
-
-
+                )}
             </ul>
 
 
