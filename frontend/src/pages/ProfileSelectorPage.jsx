@@ -5,14 +5,14 @@ import TestAuth from "../components/test/TestAuth"
 import { useProfile } from '../hooks/useProfile';
 import { useNavigate } from 'react-router';
 
-const profilesData = [
-  { id: 1, name: 'Blythe', avatar: 'https://robohash.org/1?200x200', isKid: false },
-  { id: 2, name: 'Junior', avatar: 'https://robohash.org/2?200x200', isKid: true },
-  // ...more profiles
-];
-
-export default function ProfileSelectorPage({profilesData}) {
-  const {setProfile} = useProfile();
+export default function ProfileSelectorPage() {
+  const profilesData = [
+    { id: 1, name: 'Blythe', avatar: 'https://robohash.org/1?200x200', isKid: false },
+    { id: 2, name: 'Junior', avatar: 'https://robohash.org/2?200x200', isKid: true },
+    // ...more profiles
+  ];
+  
+  const {setProfile } = useProfile();
   const navigate = useNavigate();
 
   const handleSelectProfile = (profile) => {
