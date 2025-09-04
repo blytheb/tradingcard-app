@@ -1,13 +1,11 @@
 import mongoose from "mongoose";
 
 const profileSchema = new mongoose.Schema({
-    parentUid: {type: String, required: true }, //Firebase UID
+    userUid: {type: String, required: true }, //Firebase UID
     name: { type: String, required: true},
-    age: Number,
-    avatarUrl: String,
+    avatarUrl: { type: String, required: true},
+    isKid: { type: Boolean, default: false}
     }, {timestamps: true}
 );
 
-const Profile = mongoose.model("Profile", profileSchema);
-
-export default Profile;
+export default  mongoose.model("Profile", profileSchema);

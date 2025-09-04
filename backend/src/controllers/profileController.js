@@ -3,13 +3,13 @@ import Profile from "../models/Profile.js";
 //create profiles
 export async function createProfile(req, res) {
     try {
-        const { name, age, avatarUrl } = req.body;
+        const { name, avatarUrl, isKid } = req.body;
 
         const newProfile = Profile.create({
-            parentUid: req.user.uid,
+            userUid: req.user.uid,
             name,
-            age,
             avatarUrl,
+            isKid,
         });
         res.status(201).json( newProfile );
     } catch (error) {
@@ -28,7 +28,20 @@ export async function getAllProfiles(req, res) {
     }
 }
 
-//Update?
+export async function updateProfile(req, res) {
+    try {
+        const updated = await Profile.findOneAndUpdate(
+            {
+                _id: req.params.id, userUid: req.user.uid
+            },
+            req.body,
+            { new: true }
+        );
+        res.json(updated);
+    } catch (error) {
+        res.status(500).json({message: "Error updating profile: ", error})
+    }
+}
 
 //Delete a profile
 export async function deleteProfile(req, res) {
