@@ -6,7 +6,7 @@ import ManageProfilesButton from '../components/profile/ManageProfilesButton';
 import TestAuth from "../components/test/TestAuth"
 
 import { useState } from 'react';
-import { useProfile } from '../hooks/useProfile';
+// import { useProfile } from '../hooks/useProfile';
 import { useNavigate } from 'react-router';
 
 export default function ProfileSelectorPage() {
@@ -17,17 +17,19 @@ export default function ProfileSelectorPage() {
   ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);  
-  const {setProfile } = useProfile();
+  // const {setProfile} = useProfile();
+  const [profiles, setProfiles] = useState(profilesData);
   const navigate = useNavigate();
 
   const handleAddProfile = (newProfile) => {
-    setProfile([...profilesData, { id: Date.now(), ...newProfile}]);
+    setProfiles([...profilesData, newProfile]);
+    console.log("profiles after add", profiles);
     setIsModalOpen(false);
   }
 
   const handleSelectProfile = (profile) => {
     console.log('Selected profile:', profile);
-    setProfile(profile);
+    setProfiles(profile);
     navigate("/home");
     // Navigate to main app/dashboard
   };
@@ -37,7 +39,7 @@ export default function ProfileSelectorPage() {
       <TestAuth />
       <h1 className="text-3xl mb-8">Who’s watching?</h1>
       <ProfileGrid 
-        profiles={profilesData}
+        profiles={profiles}
         onSelectProfile={handleSelectProfile}
         onAdd={() => setIsModalOpen(true)}
       />

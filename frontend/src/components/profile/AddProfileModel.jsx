@@ -9,12 +9,12 @@ export default function AddProfileModal({ isOpen, onClose, onSave }) {
 
   // Predefined avatars (replace with your own assets later if needed)
   const avatarOptions = [
-    "https://i.pravatar.cc/100?u=1",
-    "https://i.pravatar.cc/100?u=2",
-    "https://i.pravatar.cc/100?u=3",
-    "https://i.pravatar.cc/100?u=4",
-    "https://i.pravatar.cc/100?u=5",
-    "https://i.pravatar.cc/100?u=6",
+    "https://robohash.org/1?200x200",
+    "https://robohash.org/2?200x200",
+    "https://robohash.org/3?200x200",
+    "https://robohash.org/4?200x200",
+    "https://robohash.org/5?200x200",
+    "https://robohash.org/6?200x200",
   ];
 
   const handleSubmit = (e) => {
@@ -28,7 +28,7 @@ export default function AddProfileModal({ isOpen, onClose, onSave }) {
       return;
     }
 
-    onSave({ name, avatar, isKid });
+    onSave({id: Date.now(), name, avatar, isKid });
 
     // Reset state
     setName("");
@@ -38,7 +38,7 @@ export default function AddProfileModal({ isOpen, onClose, onSave }) {
 
   return (
     <dialog id="add_profile_modal" className={`modal ${isOpen ? "modal-open" : ""}`}>
-      <div className="modal-box bg-base-200 p-6 rounded-2xl max-w-lg">
+      <div className="modal-box bg-base-200 p-6 rounded-2xl max-w-lg text-black">
         <h2 className="text-xl font-bold mb-4">Create New Profile</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
