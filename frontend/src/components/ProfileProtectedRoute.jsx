@@ -1,8 +1,8 @@
 import { Navigate } from "react-router";
-import { useProfile } from "../hooks/useProfile";
+import { useCurrentProfile } from "../hooks/useCurrentProfile";
 
 export default function ProfileProtectedRoute({ children }) {
-  const { profile } = useProfile();
+  const { profile } = useCurrentProfile();
 
   if (!profile) {
     return <Navigate to="/profiles" replace />;

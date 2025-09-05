@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link} from 'react-router'
 import { useAuth } from '../hooks/useAuth'
-import { useProfile } from '../hooks/useProfile'
+import { useCurrentProfile } from '../hooks/useCurrentProfile'
 import { useLogout } from '../hooks/useLogout';
 
 const Navbar = () => {
     const { user } = useAuth();
-    const { profile } = useProfile();
+    const { currentProfile } = useCurrentProfile();
     const handleLogout = useLogout();
 
   return (
@@ -28,7 +28,7 @@ const Navbar = () => {
                     </>
                 )}
 
-                {user && !profile && (
+                {user && !currentProfile && (
                     <>
                     <li>Select a Profile</li>
                     <li><Link onClick={handleLogout}>Logout</Link></li>
@@ -36,9 +36,9 @@ const Navbar = () => {
                     </>
                 )}
 
-                {user && profile && (
+                {user && currentProfile && (
                     <>
-                    <li><Link to={`/home/${profile.id}`}>Home</Link></li>
+                    <li><Link to={`/home/${currentProfile.id}`}>Home</Link></li>
                     <li><Link to="/settings">User Settings</Link></li>
                     <li><Link onClick={handleLogout}>Logout</Link></li>
                     </>

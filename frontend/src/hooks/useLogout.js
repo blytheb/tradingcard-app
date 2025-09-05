@@ -1,10 +1,10 @@
 import React from 'react'
-import { logout } from "../firebase";
-import { useProfile } from './useProfile';
+import { logout } from "../services/firebase";
+import { useCurrentProfile } from './useCurrentProfile';
 import { useNavigate } from 'react-router';
 
 export const useLogout = () => {
-    const {setProfile} = useProfile();
+    const {setProfile} = useCurrentProfile();
     const navigate = useNavigate();
 
     const handleLogout = async () => {

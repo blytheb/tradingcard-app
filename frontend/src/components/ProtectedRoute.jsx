@@ -1,10 +1,10 @@
 import { Navigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
-import { useProfile } from "../hooks/useProfile";
+import { useCurrentProfile } from "../hooks/useCurrentProfile";
 
 export default function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
-  const { setProfile } = useProfile();
+  const { setCurrentProfile } = useCurrentProfile();
 
   // While Firebase is checking if user is logged in
   if (loading) {
@@ -13,7 +13,7 @@ export default function ProtectedRoute({ children }) {
 
   // If no user → clear profile + redirect to login
   if (!user) {
-    setProfile(null);
+    setCurrentProfile(null);
     return <Navigate to="/login" replace />;
   }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { auth } from '../../firebase'
+import { auth } from '../../services/firebase'
 
 const TokenTestButton = () => {
     const handleClick = async () => {

@@ -6,17 +6,17 @@ import {BrowserRouter } from "react-router";
 import { Toaster } from "react-hot-toast"
 
 import { AuthProvider } from './context/AuthContext.jsx';
-import { ProfileProvider } from './context/ProfileContext.jsx';
+import { CurrentProfileProvider } from './context/CurrentProfileContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <ProfileProvider>
+      <CurrentProfileProvider>
         <BrowserRouter>
           <App />
           <Toaster />
         </BrowserRouter>
-      </ProfileProvider>
+      </CurrentProfileProvider>
     </AuthProvider>
   </StrictMode>,
 )
