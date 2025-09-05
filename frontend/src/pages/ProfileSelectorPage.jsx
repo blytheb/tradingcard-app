@@ -11,12 +11,6 @@ import { useCurrentProfile } from '../hooks/useCurrentProfile';
 import { useNavigate } from 'react-router';
 
 export default function ProfileSelectorPage() {
-  // const profilesData = [
-  //   { id: 1, name: 'Blythe', avatar: 'https://robohash.org/1?200x200', isKid: false },
-  //   { id: 2, name: 'Junior', avatar: 'https://robohash.org/2?200x200', isKid: true },
-  //   // ...more profiles
-  // ];
-
   const [isModalOpen, setIsModalOpen] = useState(false);  
   const {allProfiles, addProfile, loading} = useAllProfiles();
   const { setCurrentProfile } = useCurrentProfile();

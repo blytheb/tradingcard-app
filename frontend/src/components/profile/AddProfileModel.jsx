@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function AddProfileModal({ isOpen, onClose, onSave }) {
   const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState(null);
   const [isKid, setIsKid] = useState(false);
 
   // Predefined avatars (replace with your own assets later if needed)
@@ -23,17 +23,20 @@ export default function AddProfileModal({ isOpen, onClose, onSave }) {
       alert("Profile name is required!");
       return;
     }
-    if (!avatar) {
+    if (!avatarUrl) {
       alert("Please select an avatar!");
       return;
     }
 
-    onSave({id: Date.now(), name, avatar, isKid });
+    const newProfile = {name, avatarUrl, isKid };
+    onSave(newProfile);
+    // onSave({id: Date.now(), name, avatarUrl, isKid });
 
     // Reset state
     setName("");
-    setAvatar(null);
+    setAvatarUrl(null);
     setIsKid(false);
+    onClose();
   };
 
   return (
@@ -59,9 +62,9 @@ export default function AddProfileModal({ isOpen, onClose, onSave }) {
                 <button
                   key={i}
                   type="button"
-                  onClick={() => setAvatar(url)}
+                  onClick={() => setAvatarUrl(url)}
                   className={`rounded-full border-2 p-1 transition ${
-                    avatar === url ? "border-primary" : "border-transparent"
+                    avatarUrl === url ? "border-primary" : "border-transparent"
                   }`}
                 >
                   <img src={url} alt="avatar option" className="w-16 h-16 rounded-full" />

@@ -15,9 +15,10 @@ export const useAllProfiles = () => {
             setLoading(true);
             try {
                 const data = await getProfiles(token);
-                setAllProfiles(data);
+                setAllProfiles(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error("Error fetching profiles", error);
+                setAllProfiles([]);
             } finally {
                 setLoading(false);
             }
@@ -29,9 +30,10 @@ export const useAllProfiles = () => {
     const addProfile = async (profileData) => {
         if (!token) return;
 
+        console.log("add profile in useAllProfiles.js -> profiledata =", profileData)
         const newProfile = await createProfile(profileData, token);
         setAllProfiles((prev) => [...prev, newProfile]);
     };
 
-    return { allProfiles, addProfile, loading};
+    return { allProfiles, addProfile, loading };
 };

@@ -7,9 +7,9 @@ export default function ProfileGrid({ profiles, onSelectProfile, onAdd }) {
   console.log("profile grid", profiles)
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-      {profiles.map((profile) => (
+      {profiles.map((profile, index) => (
         <ProfileCard
-          key={profile.id}
+          key={index}
           profile={profile}
           onSelect={() => onSelectProfile(profile)}
         />
