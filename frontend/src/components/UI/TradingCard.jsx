@@ -1,1 +1,0 @@
-//generic card for trading
