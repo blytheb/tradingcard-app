@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import LoginPage from './pages/auth/LoginPage';
-import SignUpPage from './pages/auth/SignupPage';
+import RegisterPage from './pages/auth/RegisterPage';
 import ProfileSelectionPage from './pages/auth/ProfileSelectionPage';
 import CardsPage from './pages/dash/CardsPage';
 import CollectionPage from './pages/dash/CollectionPage';
@@ -23,7 +23,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Root />} />
           <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/register' element={<RegisterPage />} />
           <Route path='/select' element={<ProfileSelectionPage />} />
           <Route path='/cards' element={<CardsPage />} />
           <Route path='/collection' element={<CollectionPage />} />
