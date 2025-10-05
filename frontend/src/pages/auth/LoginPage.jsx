@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Input from '../../components/Inputs/Input';
 import { Link } from 'react-router-dom';
 import { validateEmail } from '../../utils/helper';
+import { auth } from '../../config/firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth'; 
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -32,8 +34,26 @@ const LoginPage = () => {
 
     setError(null);
 
-    //LoginAPI CALL HERE
-    console.log("Login API CALL HERE");
+    //LoginFIREBASE HERE
+    console.log("Login with FIREBASE starting ...");
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const idToken = await userCredential.user.getIdToken();
+
+      //send this to token to backend for verification
+      const response = await fetch ("http://localhost:5000/api/firebase", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${idToken}` },
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("firebase login error", error);
+      setError("Failed to login. Please try again.");
+    }
+
+
   }  
 
 return (

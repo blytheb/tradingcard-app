@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
+frontend/.env
+backend/.env
 serviceAccountKey.json
