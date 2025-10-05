@@ -11,12 +11,12 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    console.log("email", email);
-    console.log("password", password);
-    console.log("error", error);
+    // console.log("email", email);
+    // console.log("password", password);
+    // console.log("error", error);
 
     if (!validateEmail(email)){
-      setError("Place enter a valid email address");
+      setError("Please enter a valid email address");
       return;
     }
 
@@ -33,6 +33,7 @@ const LoginPage = () => {
     setError(null);
 
     //LoginAPI CALL HERE
+    console.log("Login API CALL HERE");
   }  
 
 return (
@@ -73,6 +74,8 @@ return (
               placeholder="Min. 8 characters"
               required
             />
+
+            {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p> }
 
             <div>
               <button
