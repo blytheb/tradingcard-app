@@ -2,6 +2,7 @@
   "name": "tradingcard-app-backend",
   "version": "1.0.0",
   "main": "server.js",
+  "type":"module",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
@@ -18,7 +19,7 @@
     "firebase-admin": "^13.5.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.19.0",
-    "multer": "^2.0.2",
+    "multer": "^2.0.2"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

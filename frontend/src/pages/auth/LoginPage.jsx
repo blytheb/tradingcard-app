@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import Input from '../../components/Inputs/Input';
 import { Link } from 'react-router-dom';
 import { validateEmail } from '../../utils/helper';
-import { auth } from '../../config/firebase';
+import { auth } from '../../utils/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth'; 
+import axios from 'axios';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -41,8 +42,7 @@ const LoginPage = () => {
       const idToken = await userCredential.user.getIdToken();
 
       //send this to token to backend for verification
-      const response = await fetch ("http://localhost:5000/api/firebase", {
-        method: "GET",
+      const response = await axios.get("http://localhost:5000/api/firebase", {
         headers: { Authorization: `Bearer ${idToken}` },
       });
 

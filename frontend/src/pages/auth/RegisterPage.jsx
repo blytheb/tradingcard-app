@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Input from '../../components/Inputs/Input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../utils/firebase.js';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';  
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -8,7 +10,9 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const handleRegister = (e) => { 
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => { 
     e.preventDefault();
 
     if (!name) {
@@ -31,8 +35,31 @@ const RegisterPage = () => {
     }
     setError(null);
     
-    //Register API CALL HERE
-    console.log("Register API CALL HERE");
+    //Register with FIREBASE
+    console.log("Login with FIREBASE starting ...");
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log("Registered with:", user.email);
+      
+      // Update the display name
+      await updateProfile(user, { displayName: name });
+      console.log("Profile updated with name:", name);
+
+      const idToken = await user.getIdToken();
+      
+      //send this to token to backend for verification
+      const response = await fetch ("http://localhost:5000/api/firebase", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${idToken}` },
+      });
+      const data = await response.json();
+      console.log(data);
+      navigate("/home");
+    } catch (error) {
+      console.error("firebase register error", error);
+      setError("Failed to register. Please try again.");      
+    }
   }
 
   return (
