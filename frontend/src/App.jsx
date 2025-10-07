@@ -14,27 +14,30 @@ import CollectionPage from './pages/dash/CollectionPage';
 import FriendsPage from './pages/dash/FriendsPage';
 import HomePage from './pages/dash/HomePage';
 import SettingsPage from './pages/dash/SettingsPage';
+import UserProvider from './context/userProvider';
 
 
 const App = () => {
   return (
-    <div>
-      <Router>
-        <Routes>
-          <Route path='/' element={<Root />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/select' element={<ProfileSelectionPage />} />
-          <Route path='/cards' element={<CardsPage />} />
-          <Route path='/collection' element={<CollectionPage />} />
-          <Route path='/friends' element={<FriendsPage />} />
-          <Route path='/home' element={<HomePage />} />
-          <Route path='/settings' element={<SettingsPage />} />
-        </Routes>
-      </Router>
-    </div>
+    <UserProvider>
+      <div>
+        <Router>
+          <Routes>
+            <Route path='/' element={<Root />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/register' element={<RegisterPage />} />
+            <Route path='/select' element={<ProfileSelectionPage />} />
+            <Route path='/cards' element={<CardsPage />} />
+            <Route path='/collection' element={<CollectionPage />} />
+            <Route path='/friends' element={<FriendsPage />} />
+            <Route path='/home' element={<HomePage />} />
+            <Route path='/settings' element={<SettingsPage />} />
+          </Routes>
+        </Router>
+      </div>
+    </UserProvider>
   )
-}
+};
 
 export default App
 

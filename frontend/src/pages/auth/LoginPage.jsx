@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Input from '../../components/Inputs/Input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { validateEmail } from '../../utils/helper';
+import axiosInstance from '../../utils/axoisInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext.jsx';
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  const { updateUser } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,15 +32,35 @@ const LoginPage = () => {
       return;
     }
 
-    if (password.length < 8) {
-      setError("Password must be atleast 8 characters long");
-      return;
-    }
+    // if (password.length < 8) {
+    //   setError("Password must be atleast 8 characters long");
+    //   return;
+    // }
 
     setError(null);
 
     //LoginAPI CALL HERE
     console.log("Login API CALL HERE");
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password
+      });
+
+      const { token, user } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(user);
+        navigate("/select");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message){
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again later.");
+      }
+    }
   }  
 
 return (
