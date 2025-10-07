@@ -33,58 +33,39 @@ export const createProfile = async (req, res) => {
 
 //Get All Profiles (for login)
 export const getAllProfiles = async (req, res) => {
-    const { email, password } = req.body;
-
-    //validation: check for missing fields
-    if (!email || !password) {
-        return res.status(400).json({ message: 'Please provide all required fields' });
-    }
+    const userId = req.user.id;
 
     try {
-        //check if user exists
-        const user = await User.findOne({ email });
-        if (!user || !(await user.matchPassword(password))) {
-            return res.status(400).json({ message: 'Invalid email or password' });
-        }
-
-        res.status(200).json({
-            id: user._id,
-            user, 
-            token: generateToken(user._id),
-        });
+        const profiles = await Profile.find({ userId });
+        res.status(200).json(profiles);
     } catch (error) {
-        res.status(500).json({ message: 'Error logging in:', error: error.message });
-    }  
+        res.status(500).json({ message: 'Error fetching profiles:', error: error.message });
+    }
 };
 
 //update Profile
 export const updateProfile = async (req, res) => {
-    const { id } = req.params;
-    const { fullName, email, password, profileImageUrl } = req.body;
+    const userId = req.user.id;
+    const profileId = req.params.id;
 
     try {
-        const user = await User.findById(id);
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        // Find the profile to update
+        const profile = await Profile.findOneAndUpdate({"userId": userId, "_id": profileId}, req.body);
+        if (!profile) {
+            return res.status(404).json({ message: 'Profile not found' });
         }
-
-        // Update fields if they are provided in the request body
-        if (fullName) user.fullName = fullName;
-        if (email) user.email = email;
-        if (password) user.password = password; // Assume password will be hashed in pre-save hook
-        if (profileImageUrl) user.profileImageUrl = profileImageUrl;
-
-        const updatedUser = await user.save();
-        res.status(200).json({
-            message: 'User updated successfully',
-            updatedUser,
-        });
+        res.status(200).json(profile);
     } catch (error) {
-        res.status(500).json({ message: 'Error updating user:', error: error.message });
-    }
+        res.status(500).json({ message: 'Error updating profile:', error: error.message });
+    }   
 };
 
 //Delete Profile
 export const deleteProfile = async (req, res) => {
-    const { id } = req.params;
+    try {
+        await Profile.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'Profile deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting profile:', error: error.message });
+    }
 };
