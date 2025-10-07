@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const ProfileSchema = new mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},    
-    profileName: {type: String, required: true},
-    profileImageUrl: {type: String, default: null},
+    name: {type: String, required: true},
+    icon: {type: String, required: true},
 }, {timestamps: true});
 
 

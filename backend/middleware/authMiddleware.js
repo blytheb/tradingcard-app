@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/UserModel.js';
 
+// Middleware to protect routes - MUST BE LOGGED IN TO HAVE ACCESS
 export const protect = async (req, res, next) => {
     let token = req.headers.authorization?.split(' ')[1];
     if (!token) {
