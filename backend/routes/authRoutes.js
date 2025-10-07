@@ -1,9 +1,9 @@
 import express from 'express';
-import { protect } from '../middleware/authMiddleware.js';
+// import { protect } from '../middleware/authMiddleware.js';
 import {
     registerUser,
     loginUser,
-    getUserInfo,
+    // getUserInfo,
 } from '../controllers/authController.js';
 
 const router = express.Router();
