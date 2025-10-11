@@ -20,7 +20,7 @@ return (
         <AddProfileCard />
       </div>
 
-      <button className="mt-12 border border-gray-400 px-6 py-2 text-gray-300 hover:text-white hover:border-white transition">
+      <button className="mt-12 border-2 border-gray-400 px-6 py-2 text-gray-300 hover:text-black hover:border-black transition">
         Manage Profiles
       </button>
     </div>
