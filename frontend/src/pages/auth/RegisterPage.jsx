@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Input from '../../components/Inputs/Input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axiosInstance from '../../utils/axoisInstance';
+import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext.jsx';
+
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -8,7 +12,10 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const handleRegister = (e) => { 
+  const navigate = useNavigate();
+  const { updateUser } = useContext(UserContext);
+
+  const handleRegister = async (e) => { 
     e.preventDefault();
 
     if (!name) {
@@ -33,6 +40,27 @@ const RegisterPage = () => {
     
     //Register API CALL HERE
     console.log("Register API CALL HERE");
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        name,
+        email,
+        password
+      });
+      
+      const { token, user } = response.data;
+      
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(user);
+        navigate("/select");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message){
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. Please try again later.");
+      }
+    }
   }
 
   return (
