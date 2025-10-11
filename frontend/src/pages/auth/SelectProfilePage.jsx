@@ -10,7 +10,7 @@ const profiles = [
 
 const SelectProfilePage = () => {
 return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center text-white">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center text-gray">
       <h1 className="text-4xl md:text-5xl font-semibold mb-12">Who's watching?</h1>
 
       <div className="flex flex-wrap justify-center gap-8">
