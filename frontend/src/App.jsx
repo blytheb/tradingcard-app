@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
-import ProfileSelectionPage from './pages/auth/ProfileSelectionPage';
+import SelectProfilePage from './pages/auth/SelectProfilePage';
 import CardsPage from './pages/dash/CardsPage';
 import CollectionPage from './pages/dash/CollectionPage';
 import FriendsPage from './pages/dash/FriendsPage';
@@ -26,7 +26,7 @@ const App = () => {
             <Route path='/' element={<Root />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
-            <Route path='/select' element={<ProfileSelectionPage />} />
+            <Route path='/select' element={<SelectProfilePage />} />
             <Route path='/cards' element={<CardsPage />} />
             <Route path='/collection' element={<CollectionPage />} />
             <Route path='/friends' element={<FriendsPage />} />
