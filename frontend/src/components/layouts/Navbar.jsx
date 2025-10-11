@@ -19,13 +19,17 @@ const Navbar = ({activeMenu}) => {
             )}
         </button>
 
-        <h2 className='text-lg font-medium text-black'>Expense Tracker</h2>
+        <h2 className='text-lg font-medium text-black'>Never Quit Dreaming </h2>
 
         {openSideMenu && (
             <div className='fixed top-[61px] -ml-4 bg-white'>
-                <SideMenu activeMenu= {activeMenu} />
+                <SideMenu activeMenu={activeMenu} />
             </div>
         )}
+
+        <div className="hidden lg:block fixed left-0 top-[61px] w-60 bg-white border-r border-gray-200 h-full">
+            <SideMenu activeMenu={activeMenu} />
+        </div>
     </div>
   )
 }
