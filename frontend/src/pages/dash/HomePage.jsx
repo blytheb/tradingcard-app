@@ -1,8 +1,12 @@
 import React from 'react'
+import DashboardLayout from '../../components/Inputs/layouts/DashboardLayout'
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <DashboardLayout activeMenu="Dashboard">
+      <div className='my-5 mx-auto'></div>
+    </DashboardLayout>
+
   )
 }
 
