@@ -7,18 +7,15 @@ const HorizontalViewLayout = ({ title, cards, path }) => {
     const [showAll, setShowAll] = useState(false);
     const visableProfiles = showAll ? cards : cards.slice(0, 3);
 
-
     const navigate = useNavigate();
-    const redirectTo = (path) => {
-        navigate(path);
-    }
+
   return (
     <div className='py-4 px-4'>
         <div class="flex items-center justify-between">
             <h1>{title}</h1>
             <button 
                 class="text-md text-indigo-600 hover:text-indigo-500"
-                onClick={() => redirectTo(path)}
+                onClick={() => navigate(path)}
             >
                 View All
             </button>
