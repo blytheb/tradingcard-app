@@ -19,7 +19,8 @@ const HomePage = () => {
     // <DashboardLayout activeMenu="Dashboard">
       <div className='my-5 mx-auto'>
         <h1 className='text-3xl font-bold'>Welcome to the Trading Card App!</h1>
-        <HorizontalViewLayout cards={cards} />
+        <HorizontalViewLayout title="My Cards" cards={cards} path="/cards"/>
+        <HorizontalViewLayout title="My Collection" cards={cards} path="/collection" />
       </div>
     //</DashboardLayout>
 
